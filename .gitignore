@@ -5,6 +5,7 @@
 .idea
 .tox
 .venv
+venv
 .env
 .vscode
 .vim
