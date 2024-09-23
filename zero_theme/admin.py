@@ -7,12 +7,13 @@ from django.utils.translation import gettext_lazy as _
 from zero_theme.widgets import zero_widget_registry
 
 USER_MODEL = get_user_model()
+app_name = USER_MODEL._meta.app_label
 
 
 class UserWidget:
     template_name = 'widget/user_widgets.html'
     priority = 1
-    app_name = _('Users')
+    app_name = app_name
 
     def get_user_data(self):
         total_user = USER_MODEL.objects.all().count()

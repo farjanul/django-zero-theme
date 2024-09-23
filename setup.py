@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='django-zero-theme',
-    version='0.1.10',
+    version='0.1.12',
     packages=find_packages(),
     include_package_data=True,  # Include static and templates
     license='MIT License',
@@ -18,6 +18,10 @@ setup(
     ],
     extras_require={
         'dev': ['pytest', 'tox', 'black'],  # Optional dependencies for development
+    },
+    project_urls={
+        'Source': 'https://github.com/farjanul/django-zero-theme',
+        'Issue Tracker': 'https://github.com/farjanul/django-zero-theme/issues',  # GitHub Issues page
     },
     classifiers=[
         'Framework :: Django',

@@ -4,6 +4,7 @@ from django import template
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.forms.widgets import CheckboxInput
+from django.utils.functional import SimpleLazyObject
 
 from zero_theme.widgets import zero_widget_registry
 
@@ -17,6 +18,9 @@ def get_admin_widget_registry():
 
 @register.filter
 def get_user_full_name(user):
+    if isinstance(user, SimpleLazyObject):
+        return user
+
     # Check if there's a 'get_full_name' method (default User model)
     if hasattr(user, 'get_full_name') and callable(user.get_full_name):
         return user.get_full_name().strip()
@@ -34,7 +38,7 @@ def get_user_full_name(user):
         return user.name.strip()
 
     # Fallback: return username or a default message
-    return user.username or "Anonymous User"
+    return user or "Anonymous User"
 
 
 def bootstrap_switch(field):
