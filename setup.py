@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='django-zero-theme',
-    version='0.1.13',
+    version='0.1.14',
     packages=find_packages(),
     include_package_data=True,  # Include static and templates
     license='MIT License',
