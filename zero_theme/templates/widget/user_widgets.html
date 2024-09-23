@@ -9,11 +9,6 @@
                         <h4 class="fw-bolder fs-5">Welcome</h4>
                         <h2 class="text-primary fs-7">{{ user|get_user_full_name }}</h2>
                     </div>
-                    <div class="ms-auto">
-                      <span class="btn round-48 fs-7 rounded-circle btn-primary d-flex align-items-center justify-content-center">
-                        <i class="ti ti-medal"></i>
-                      </span>
-                    </div>
                 </div>
                 <form id="logout-form" method="post"
                       action="{% url 'admin:logout' %}">
