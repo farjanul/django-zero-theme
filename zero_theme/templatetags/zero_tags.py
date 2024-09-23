@@ -128,8 +128,9 @@ def row_clean(item):
 
     modified_html = re.sub(img_tag_pattern, replace_with_switch, modified_html)
 
-    item = modified_html.replace('th', 'td')
-    return mark_safe(item)
+    html_replaced = re.sub(r'<th\b([^>]*)>', r'<td\1>', modified_html)
+    html_replaced = re.sub(r'</th>', '</td>', html_replaced)
+    return mark_safe(html_replaced)
 
 
 @register.filter
