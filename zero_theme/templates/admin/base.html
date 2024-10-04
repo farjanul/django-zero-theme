@@ -1,23 +1,36 @@
 {% load i18n static %}<!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
-<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" dir="{{ LANGUAGE_BIDI|yesno:'rtl,ltr,auto' }}">
+<html lang="{{ LANGUAGE_CODE|default:" en-us" }}" dir="{{ LANGUAGE_BIDI|yesno:'rtl,ltr,auto' }}">
 <head>
     <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="{% block stylesheet %}{% static "css/styles.css" %}{% endblock %}">
-    {#<link rel="stylesheet" href="{% static 'admin/css/base.css' %}">#}
-    {#<link rel="stylesheet" href="{% static 'css/main.css' %}">#}
+    <link rel="stylesheet" href="{% block stylesheet %}{% static " css
+    /styles.css" %}{% endblock %}">
+    {#
+    <link rel="stylesheet" href="{% static 'admin/css/base.css' %}">
+    #}
+    {#
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    #}
 
     <!-- Include Select2 CSS -->
     <link href="{% static 'js/select2/css/select2.min.css' %}" rel="stylesheet"/>
     <link rel="stylesheet" href="{% static 'css/sweetalert2.min.css' %}">
 
-    {#    {% block dark-mode-vars %}#}
-    {#      <link rel="stylesheet" href="{% static "admin/css/dark_mode.css" %}">#}
-    {#      <script src="{% static "admin/js/theme.js" %}"></script>#}
-    {#    {% endblock %}#}
+    {# {% block dark-mode-vars %}#}
+    {#
+    <link rel="stylesheet" href="{% static " admin
+    /css/dark_mode.css" %}">#}
+    {#
+    <script src="{% static " admin
+    /js/theme.js" %}"></script>#}
+    {# {% endblock %}#}
     {#{% if not is_popup and is_nav_sidebar_enabled %}#}
-    {#  <link rel="stylesheet" href="{% static "admin/css/nav_sidebar.css" %}">#}
-    {#  <script src="{% static 'admin/js/nav_sidebar.js' %}" defer></script>#}
+    {#
+    <link rel="stylesheet" href="{% static " admin
+    /css/nav_sidebar.css" %}">#}
+    {#
+    <script src="{% static 'admin/js/nav_sidebar.js' %}" defer></script>
+    #}
     {#{% endif %}#}
 
     <style>
@@ -57,74 +70,76 @@
 
     {% block extrastyle %}{% endblock %}
     {% if LANGUAGE_BIDI %}
-        <link rel="stylesheet"
-              href="{% block stylesheet_rtl %}{% static "admin/css/rtl.css" %}{% endblock %}">{% endif %}
+    <link rel="stylesheet"
+          href="{% block stylesheet_rtl %}{% static " admin
+    /css/rtl.css" %}{% endblock %}">{% endif %}
     {% block extrahead %}{% endblock %}
     {#{% block responsive %}#}
-    {#    <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
-    {#    <link rel="stylesheet" href="{% static "admin/css/responsive.css" %}">#}
-    {#    {% if LANGUAGE_BIDI %}<link rel="stylesheet" href="{% static "admin/css/responsive_rtl.css" %}">{% endif %}#}
+    {#
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    #}
+    {#
+    <link rel="stylesheet" href="{% static " admin
+    /css/responsive.css" %}">#}
+    {# {% if LANGUAGE_BIDI %}
+    <link rel="stylesheet" href="{% static " admin
+    /css/responsive_rtl.css" %}">{% endif %}#}
     {#{% endblock %}#}
     {% block blockbots %}
-        <meta name="robots" content="NONE,NOARCHIVE">{% endblock %}
+    <meta name="robots" content="NONE,NOARCHIVE">
+    {% endblock %}
 </head>
 
 <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}"
-      data-admin-utc-offset="{% now "Z" %}">
+      data-admin-utc-offset="{% now " Z" %}">
 {#<a href="#content-start" class="skip-to-content-link">{% translate 'Skip to main content' %}</a>#}
 <!-- Container -->
 
 
 <div id="main-wrapper">
     {% if user.is_authenticated %}
-        <!-- Sidebar Start -->
-        {% block nav-sidebar %}
-            {% include "admin/nav_sidebar.html" %}
-        {% endblock %}
-        <!--  Sidebar End -->
+    <!-- Sidebar Start -->
+    {% block nav-sidebar %}
+    {% include "admin/nav_sidebar.html" %}
+    {% endblock %}
+    <!--  Sidebar End -->
     {% endif %}
 
     <div class="{% if user.is_authenticated %}page-wrapper{% endif %}">
         {% if user.is_authenticated %}
-            {% include 'admin/components/header.html' %}
+        {% include 'admin/components/header.html' %}
         {% endif %}
 
         <div class="{% if user.is_authenticated %}body-wrapper{% endif %}">
             {% block messages %}
                 {% if messages %}
                     {% for message in messages %}
-                        <!-- JavaScript to Show Toast Automatically -->
-                        <script>
-                            document.addEventListener('DOMContentLoaded', function () {
-                                {% if message.tags %}
-                                    var toast = new bootstrap.Toast(`ts-{{ message.tags }}`);
-                                    toastr.error(`{{ message|capfirst }}`, `{{ message.tags }}`);
-                                    toast.show();
-                                {% else %}
-                                    var toast = new bootstrap.Toast('ts-info');
-                                    toastr.error(`{{ message|capfirst }}`, "");
-                                    toast.show();
-                                {% endif %}
-                            });
-                        </script>
+                        <div class="mx-4">
+                            <div class="alert customize-alert alert-light-{{ message.tags }} bg-{{ message.tags }}-subtle text-{{ message.tags }} alert-dismissible fade show"
+                                 role="alert">
+                                <button type="button" class="btn-close btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                {{ message|capfirst }}
+                            </div>
+                        </div>
                     {% endfor %}
                 {% endif %}
             {% endblock messages %}
 
             <div class="container-fluid mw-100 {% if not user.is_authenticated %} p-0 {% endif %}">
                 {% block pretitle %}{% endblock %}
-                {#                {% block content_title %}{% if title %}<h1>{{ title }}</h1>{% endif %}{% endblock %}#}
-                {#                {% block content_subtitle %}{% if subtitle %}<h2>{{ subtitle }}</h2>{% endif %}{% endblock %}#}
+                {# {% block content_title %}{% if title %}<h1>{{ title }}</h1>{% endif %}{% endblock %}#}
+                {# {% block content_subtitle %}{% if subtitle %}<h2>{{ subtitle }}</h2>{% endif %}{% endblock %}#}
                 {% block content %}
-                    {% block object-tools %}{% endblock %}
-                    {{ content }}
+                {% block object-tools %}{% endblock %}
+                {{ content }}
                 {% endblock %}
                 {% block sidebar %}{% endblock %}
-                {#                <br class="clear">#}
+                {# <br class="clear">#}
             </div>
 
             {% if user.is_authenticated %}
-                {% include 'admin/components/footer.html' %}
+            {% include 'admin/components/footer.html' %}
             {% endif %}
 
         </div>
@@ -148,9 +163,11 @@
 
 <!-- solar icons -->
 <script src="{% static 'js/iconify-icon.min.js' %}"></script>
-{#<script src="{% static 'js/apexcharts.min.js' %}"></script>#}
+{#
+<script src="{% static 'js/apexcharts.min.js' %}"></script>#}
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-{#<script src="{% static 'js/dashboard.js' %}"></script>#}
+{#
+<script src="{% static 'js/dashboard.js' %}"></script>#}
 
 <script src="{% static 'js/select2/js/select2.full.min.js' %}"></script>
 <script src="{% static 'js/select2/js/select2.min.js' %}"></script>

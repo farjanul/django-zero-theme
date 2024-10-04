@@ -65,8 +65,8 @@
                                 <form action="{{ app_path }}" method="post" id="login-form">
                                     {% csrf_token %}
                                     <div class="mb-3">
-                                        <label for="id_username" class="form-label">Username</label>
-                                        <input type="email" name="username" class="form-control" id="id_username"
+                                        <label for="id_username" class="form-label">Username or Email</label>
+                                        <input type="text" name="username" class="form-control" id="id_username"
                                                aria-describedby="emailHelp">
                                         {{ form.username.errors }}
                                     </div>
